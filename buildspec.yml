@@ -5,20 +5,32 @@ phases:
     runtime-versions:
       php: 8.2
     commands:
-      - echo "📦 Installing dependencies..."
+      # Update & install dependencies
+      - echo Installing dependencies...
+      - apt-get update -y
+      - apt-get install -y unzip git curl
+      # Install Composer
+      - echo Installing Composer...
+      - curl -sS https://getcomposer.org/installer | php
+      - mv composer.phar /usr/local/bin/composer
+      # Install project dependencies
+      - composer install
 
   pre_build:
     commands:
-      - echo "🔐 Setting up SSH private key"
+      - echo Running pre-build steps...
+      - composer dump-autoload
 
   build:
     commands:
-      - echo "✅ Running unit tests..."
+      - echo Running unit tests...
+      - vendor/bin/phpunit --configuration phpunit.xml
 
   post_build:
     commands:
-      - echo "🚀 Deploying to EC2..."
+      - echo Build and tests completed.
 
 artifacts:
   files:
     - '**/*'
+  discard-paths: yes
