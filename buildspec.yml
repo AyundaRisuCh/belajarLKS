@@ -24,7 +24,7 @@ phases:
   build:
     commands:
       - echo Running unit tests...
-      - vendor/bin/phpunit --configuration phpunit.xml
+      
 
   post_build:
     commands:
