@@ -1,0 +1,62 @@
+# --------------------------
+# Umum
+# --------------------------
+*.log
+*.tmp
+*.swp
+*.bak
+*.old
+*.orig
+*.DS_Store
+*.sublime-workspace
+*.sublime-project
+*.vscode/
+.idea/
+
+# --------------------------
+# Composer
+# --------------------------
+vendor/
+composer.lock
+
+# --------------------------
+# Laravel (jika pakai)
+# --------------------------
+.env
+.env.*
+storage/*.key
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+
+# --------------------------
+# PHPUnit
+# --------------------------
+.phpunit.result.cache
+tests/_output/
+coverage/
+
+# --------------------------
+# Cache / build tools
+# --------------------------
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+dist/
+build/
+
+# --------------------------
+# Direktori upload / sementara
+# --------------------------
+uploads/
+tmp/
+cache/
+
+# --------------------------
+# File sistem dan editor
+# --------------------------
+Thumbs.db
+Desktop.ini

@@ -1,0 +1,1 @@
+# Tutorial: Deploy ke Amazon EC2 instances dengan CodePipeline
