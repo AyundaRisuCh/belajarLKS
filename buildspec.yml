@@ -7,8 +7,8 @@ phases:
     commands:
       # Update & install dependencies
       - echo Installing dependencies...
-      - apt-get update -y
-      - apt-get install -y unzip git curl
+      - sudo yum update -y
+      - sudo yum install -y unzip git curl
       # Install Composer
       - echo Installing Composer...
       - curl -sS https://getcomposer.org/installer | php
