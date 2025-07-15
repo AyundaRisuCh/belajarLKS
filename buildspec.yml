@@ -2,33 +2,21 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      php: 8.2
     commands:
-      # Update & install dependencies
-      - echo Installing dependencies...
+      - echo "Testing Internet Access"
+      - curl -I https://google.com || echo "NO INTERNET"
+      - echo "Installing dependencies on Amazon Linux"
       - sudo yum update -y
       - sudo yum install -y unzip git curl
-      # Install Composer
-      - echo Installing Composer...
-      - curl -sS https://getcomposer.org/installer | php
-      - mv composer.phar /usr/local/bin/composer
-      # Install project dependencies
-      - composer install
-
   pre_build:
     commands:
-      - echo Running pre-build steps...
-      - composer dump-autoload
-
+      - echo "Pre-build step"
   build:
     commands:
-      - echo Running unit tests...
-      
-
+      - echo "Build step"
   post_build:
     commands:
-      - echo Build and tests completed.
+      - echo "Post-build step"
 
 artifacts:
   files:
