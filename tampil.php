@@ -1,5 +1,5 @@
 <?php
-$db = new mysqli('endpoint-rds-anda.rds.amazonaws.com', 'admin', 'password', 'sigap_db');
+$db = new mysqli('replica-db.cepq8smwuvdk.us-east-1.rds.amazonaws.com', 'root', 'admin123#', 'sigap_db');
 
 if ($db->connect_error) {
     die("Koneksi database gagal: " . $db->connect_error);
