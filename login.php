@@ -1,9 +1,9 @@
 <?php
 // login.php
-$host = 'YOUR_RDS_ENDPOINT';
-$db = 'YOUR_DB_NAME';
-$user = 'YOUR_DB_USER';
-$pass = 'YOUR_DB_PASSWORD';
+$host = 'database-1.cepq8smwuvdk.us-east-1.rds.amazonaws.com';
+$db = 'sigap_db';
+$user = 'root';
+$pass = 'admin123#';
 
 $conn = new mysqli($host, $user, $pass, $db);
 
