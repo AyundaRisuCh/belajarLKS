@@ -3,30 +3,23 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Detecting OS and Installing PHP & dependencies on Amazon Linux 2023...
-      - dnf update -y
-      # Enable PHP 8.2 module
-      - dnf module enable php:8.2 -y
-      # Install PHP and necessary extensions
-      - dnf install -y php php-cli php-mbstring php-xml php-json php-common git unzip curl
-      - echo Installing Composer...
-      - curl -sS https://getcomposer.org/installer | php
-      - mv composer.phar /usr/local/bin/composer
-      - echo Running Composer install...
+      - echo Using built-in PHP and Composer from AWS CodeBuild image...
+      - php -v
+      - composer --version
       - composer install
 
   pre_build:
     commands:
-      - echo Running pre-build steps...
+      - echo Pre-build phase...
       - composer dump-autoload
 
   build:
     commands:
-      - echo Running build steps...
+      - echo Build phase...
 
   post_build:
     commands:
-      - echo ✅ Build and post-build steps completed.
+      - echo ✅ Build completed successfully.
 
 artifacts:
   files:
