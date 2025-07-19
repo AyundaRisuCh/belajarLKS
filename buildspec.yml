@@ -2,14 +2,10 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      php: 8.2
     commands:
-      - echo Installing dependencies on Amazon Linux 2...
-      - yum update -y
-      - amazon-linux-extras enable php8.2
-      - yum clean metadata
-      - yum install -y php php-mbstring php-xml php-json git unzip curl
+      - echo Installing dependencies on Amazon Linux 2023...
+      - dnf update -y
+      - dnf install -y php php-cli php-mbstring php-xml php-json git unzip curl
       - echo Installing Composer...
       - curl -sS https://getcomposer.org/installer | php
       - mv composer.phar /usr/local/bin/composer
