@@ -5,15 +5,13 @@ phases:
     runtime-versions:
       php: 8.2
     commands:
-      # Update & install dependencies
-      - echo Installing dependencies...
-      - apt-get update -y
-      - apt-get install -y unzip git curl
-      # Install Composer
+      - echo Installing system dependencies on Amazon Linux...
+      - yum update -y
+      - yum install -y git unzip curl php-cli php-mbstring php-xml php-common php-json
       - echo Installing Composer...
       - curl -sS https://getcomposer.org/installer | php
       - mv composer.phar /usr/local/bin/composer
-      # Install project dependencies
+      - echo Installing PHP project dependencies with Composer...
       - composer install
 
   pre_build:
@@ -23,12 +21,11 @@ phases:
 
   build:
     commands:
-      - echo Running unit tests...
-      
+      - echo Running build (e.g., tests, code checks)...
 
   post_build:
     commands:
-      - echo Build and tests completed.
+      - echo ✅ Build and post-build steps completed.
 
 artifacts:
   files:
