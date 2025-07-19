@@ -23,7 +23,7 @@ class Converse
     {
         // Create a Bedrock Runtime client in the AWS Region you want to use.
         $client = new BedrockRuntimeClient([
-            'region' => 'ap-southeast-2',
+            'region' => 'us-east-1',
             'version' => 'latest'
         ]);
 
