@@ -1,29 +1,88 @@
 <?php
+// Use the Conversation API to send a text message to Amazon Nova.
+
 require 'vendor/autoload.php';
 
-use Aws\LexRuntimeV2\LexRuntimeV2Client;
+error_reporting(E_ALL);
 
-$client = new LexRuntimeV2Client([
-    'region' => 'us-east-1', // ganti dengan region bot kamu
-    'version' => 'latest',
-    'credentials' => [
-        'key'    => 'AKIAXXXXXXXX',       // hanya jika tidak menggunakan IAM Role
-        'secret' => 'YOUR_SECRET_KEY',
-    ]
-]);
+ini_set('display_errors', 1); // Hide errors from being displayed in the browser
+ini_set('log_errors', 1);    // Enable error logging
+ini_set('error_log', '/path/to/your/error.log'); // Specify the log file
 
-try {
-    $result = $client->recognizeText([
-        'botAliasId' => 'TSTALIASID', // ganti
-        'botId' => 'ABCDEF123',       // ganti
-        'localeId' => 'en_US',        // ganti ke id_ID jika pakai bahasa Indonesia
-        'sessionId' => 'user123',     // unik per user
-        'text' => $_GET['pesan']      // input dari user
-    ]);
+// Use the Conversation API to send a text message to Amazon Nova.
 
-    echo $result['messages'][0]['content'];
+use Aws\BedrockRuntime\BedrockRuntimeClient;
+use Aws\Exception\AwsException;
+use RuntimeException;
 
-} catch (Exception $e) {
-    echo 'Error: ' . $e->getMessage();
+header('Content-Type: application/json');
+
+class Converse
+{
+    public function converse(string $userMessage): string
+    {
+        // Create a Bedrock Runtime client in the AWS Region you want to use.
+        $client = new BedrockRuntimeClient([
+            'region' => 'ap-southeast-2',
+            'version' => 'latest'
+        ]);
+
+        // Set the model ID, e.g., Amazon Nova Lite.
+        $modelId = 'amazon.nova-micro-v1:0';
+
+        $conversation = [
+            [
+                "role" => "user",
+                "content" => [["text" => $userMessage]]
+            ]
+        ];
+
+        try {
+            $response = $client->converse([
+                'modelId' => $modelId,
+                'messages' => $conversation,
+                'inferenceConfig' => [
+                    'maxTokens' => 512,
+                    'temperature' => 0.5
+                ]
+            ]);
+
+            $responseText = $response['output']['message']['content'][0]['text'];
+            return $responseText;
+        } catch (AwsException $e) {
+            http_response_code(500);
+            return json_encode([
+                "error" => true,
+                "message" => $e->getMessage()
+            ]);
+        } catch (\Throwable $e) {
+            http_response_code(500);
+            return json_encode([
+                "error" => true,
+                "message" => $e->getMessage()
+            ]);
+        }
+    }
 }
-?>
+
+// Ambil input dari URL (GET atau POST)
+$inputMessage = $_GET['message'] ?? $_POST['message'] ?? null;
+
+if (!$inputMessage) {
+    http_response_code(400);
+    echo json_encode([
+        "error" => true,
+        "message" => "Parameter 'message' is required"
+    ]);
+    exit;
+}
+
+$demo = new Converse();
+$response = $demo->converse($inputMessage);
+
+// Jika sudah JSON, langsung echo
+if (is_string($response)) {
+    echo $response;
+} else {
+    echo json_encode(["response" => $response]);
+}
