@@ -5,9 +5,11 @@ phases:
     runtime-versions:
       php: 8.2
     commands:
-      - echo Installing system dependencies on Amazon Linux...
+      - echo Installing dependencies on Amazon Linux 2...
       - yum update -y
-      - yum install -y git unzip curl php-cli php-mbstring php-xml php-common php-json
+      - amazon-linux-extras enable php8.2
+      - yum clean metadata
+      - yum install -y php php-mbstring php-xml php-json git unzip curl
       - echo Installing Composer...
       - curl -sS https://getcomposer.org/installer | php
       - mv composer.phar /usr/local/bin/composer
@@ -21,7 +23,7 @@ phases:
 
   build:
     commands:
-      - echo Running build (e.g., tests, code checks)...
+      - echo Running build steps...
 
   post_build:
     commands:
