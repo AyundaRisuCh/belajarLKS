@@ -1,6 +1,6 @@
 <?php
 // login.php
-$host = 'database-1.cjqs0i4iie68.ap-southeast-2.rds.amazonaws.com';
+$host = 'database-2.cjqs0i4iie68.ap-southeast-2.rds.amazonaws.com';
 $db = 'sigap_db';
 $user = 'root';
 $pass = 'admin123#';
