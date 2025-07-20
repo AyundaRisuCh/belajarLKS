@@ -1,5 +1,5 @@
 <?php
-$db = new mysqli('database-1.cjqs0i4iie68.ap-southeast-2.rds.amazonaws.com','root','admin123#','sigap_db');
+$db = new mysqli('database-2.cjqs0i4iie68.ap-southeast-2.rds.amazonaws.com','root','admin123#','sigap_db');
 if($_SERVER['REQUEST_METHOD']=='POST'){
     $jenis_bencana=$db->real_escape_string($_POST['jenis_bencana']);
     $lokasi=$db->real_escape_string($_POST['lokasi']);
