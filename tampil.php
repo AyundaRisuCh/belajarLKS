@@ -1,5 +1,5 @@
 <?php
-$db = new mysqli('replica-db.cb24ouuuwt7w.ap-southeast-2.rds.amazonaws.com', 'root', 'admin123#', 'sigap_db');
+$db = new mysqli('replica-db.cjqs0i4iie68.ap-southeast-2.rds.amazonaws.com', 'root', 'admin123#', 'sigap_db');
 
 if ($db->connect_error) {
     die("Koneksi database gagal: " . $db->connect_error);
