@@ -120,3 +120,27 @@ Membuat replica di aws
 - buat nama, single AZ, IPv4, publicly accessible, enable auto minor, lalu create read replica dan tunggu sampai available
 - jika sudah klik replica yang dibuat tadi dan copy endpointnya, pastekan endpointnya di tampil.php
 
+### install composer
+```bash
+cd ~
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+```
+
+### Install php-zip
+```bash
+sudo apt install -y php-zip
+```
+
+### Install kembali composer pada directory html
+```bash
+composer require aws/aws-sdk-php
+```
+
+### Buka folder cd
+```bash
+cd ~
+aws configure
+```
+
+### Pada aws configure
