@@ -144,3 +144,10 @@ aws configure
 ```
 
 ### Pada aws configure
+a. Masukkan Key access user-nya
+
+b. Masukkan secret key-nya
+
+c. Masukkan region yang dipakai contoh ap-southeast-2
+
+d. Masukkan outputnya json
